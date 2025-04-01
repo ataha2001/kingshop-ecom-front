@@ -166,17 +166,6 @@ const ProgressStep = ({ stepNumber, label, isComplete }) => {
     </div>
   );
 };
-// const address={
-//     fullname:"",
-//     phone:"",
-//     email:"",
-//     addressline1:"",
-//     addressline2:"",
-//     city:"",
-//     state:"",
-//     zipCode:"",
-//     country:""
-// }
 // Address Section
 const AddressSection = ({ title, address, onEditAddress, onAddNewAddress }) => {
   return (
@@ -250,6 +239,7 @@ const CartSummary = ({ subtotal, tax, shippingCharge, discount, total }) => {
 
 const Checkout = () => {
   const [clientSecret, setClientSecret] = useState(null);
+    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
    const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState(null);
@@ -372,6 +362,7 @@ const handleSaveAndPay = async () => {
                 });
  if (res?.data?.clientSecret) {
                 setClientSecret(res.data.clientSecret);
+                setIsCheckoutOpen(true); // Open the modal
             } else {
                 setError("Failed to get client secret.");
             }
@@ -430,11 +421,15 @@ const handleSaveAndPay = async () => {
         
       )}
 
-      {/* Load CheckoutForm only when we have a clientSecret */}
-            {clientSecret && (
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckoutForm />
-                </Elements>
+      {clientSecret && isCheckoutOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+                        <button className="absolute top-2 right-2 text-red-500" onClick={() => setIsCheckoutOpen(false)}>✖</button>
+                        <Elements stripe={stripePromise} options={{ clientSecret }}>
+                            <CheckoutForm />
+                        </Elements>
+                    </div>
+                </div>
             )}
     </>
   );
