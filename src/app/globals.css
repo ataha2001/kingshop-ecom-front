@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@layer utilities {
+  .text-balance{
+    text-wrap: balance;
+  }
+}
+
+
+.banner .slick-dots {
+  bottom: 10px !important;
+}
+
+.banner .slick-next {
+  right: 15px !important;
+}
+
+.banner .slick-prev {
+  left: 15px !important;
+  z-index: 100;
+}
+.scroll{
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-color: #f23e14 white;
+}
+/* Customize the toast notification */
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.Toastify__toast--success {
+  background-color: #22c55e;
+}
+
+.Toastify__toast--error {
+  background-color: #ef4444;
+  
+}
+
+.Toastify__toast--info {
+  background-color: #3b82f6;
+}
+
+.Toastify__toast--warning {
+  background-color: #f59e0b;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ea580c; /* Orange */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb; /* Light Orange */
+}
